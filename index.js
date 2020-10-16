@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('JVCParry API')
+  res.status(200).send('JVCParry API')
 })
 
 app.post('/send', (req, res) => {
