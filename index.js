@@ -32,9 +32,9 @@ app.post('/send', (req, res) => {
     from: data.email,
     to: config.JVCPARRY_TO_EMAIL,
     subject: 'JVCParry website contact form',
-    html: `<p>${data.name}</p>
-          <p>${data.email}</p>
-          <p>${data.message}</p>`
+    html: `<p>From: ${data.name}</p>
+          <p>Email: ${data.email}</p>
+          <p>Message: ${data.message}</p>`
   };
 
   smtpTransport.sendMail(mailOptions,
