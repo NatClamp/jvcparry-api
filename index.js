@@ -3,11 +3,10 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
+const config = { ...process.env };
+
 
 const app = express();
-
-
-const port = 8000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,14 +23,14 @@ app.post('/send', (req, res) => {
   let smtpTransport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.JVCPARRY_FROM_EMAIL,
-      pass: process.env.JVCPARRY_FROM_PASS
+      user: config.JVCPARRY_FROM_EMAIL,
+      pass: config.JVCPARRY_FROM_PASS
     }
   });
 
   let mailOptions = {
     from: data.email,
-    to: process.env.JVCPARRY_TO_EMAIL,
+    to: config.JVCPARRY_TO_EMAIL,
     subject: 'JVCParry website contact form',
     html: `<p>${data.name}</p>
           <p>${data.email}</p>
@@ -56,6 +55,5 @@ app.post('/send', (req, res) => {
 
 });
 
-app.listen(port, () => {
-  console.log('We are live on port 8000');
-});
+
+app.listen(config.PORT || 8000, () => console.log(`We are live on port http://localhost:${config.PORT || 8000}`));
