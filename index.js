@@ -14,6 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.send('JVCParry API')
+})
+
 app.post('/send', (req, res) => {
   let data = req.body;
 
